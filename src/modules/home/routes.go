@@ -1,6 +1,7 @@
 package home
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"time"
@@ -18,8 +19,23 @@ func HealthCheck(c *gin.Context) {
 	})
 }
 
+func postTest(c *gin.Context) {
+	var test Book
+
+	err := c.ShouldBindJSON(&test)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+	}
+
+	fmt.Printf("Title: %s \nAuthor: %s \n", test.Title, test.Author)
+}
+
 func SetupRoutes(router *gin.RouterGroup) {
 	home := router.Group("home")
 
 	home.GET("/health", HealthCheck)
+	home.POST("/test", postTest)
 }
