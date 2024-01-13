@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"oracao-bandas.com/src/modules/bands"
 	"oracao-bandas.com/src/modules/home"
 )
 
@@ -12,6 +13,7 @@ func StartServer() {
 	api := router.Group("api")
 
 	home.SetupRoutes(api)
+	bands.SetupRoutes(api)
 
 	api.GET("/test", func(context *gin.Context) {
 		context.JSON(http.StatusOK, gin.H{
@@ -19,5 +21,8 @@ func StartServer() {
 		})
 	})
 
-	router.Run()
+	err := router.Run()
+	if err != nil {
+		return
+	}
 }
