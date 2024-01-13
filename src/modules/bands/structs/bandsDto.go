@@ -1,6 +1,6 @@
 package structs
 
-type Band struct {
+type BandDto struct {
 	Title   string `json:"title" binding:"required"`
 	Type    string `json:"type" binding:"required"`
 	Country string `json:"country" binding:"required"`
