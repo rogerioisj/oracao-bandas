@@ -3,7 +3,7 @@ package entities
 import "time"
 
 type BaseEntity struct {
-	Id         string
-	CreateDate time.Time
-	LastUpdate time.Time
+	ID        string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
