@@ -6,7 +6,7 @@ import (
 
 type Band struct {
 	entities.BaseEntity
-	Title   string
+	Title   string `gorm:"type:varchar(150); unique; NOT_NULL"`
 	Type    string
 	Country string
 	UF      string
