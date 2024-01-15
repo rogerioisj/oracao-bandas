@@ -21,7 +21,7 @@ func StartServer() {
 		})
 	})
 
-	err := router.Run()
+	err := router.Run(":8000")
 	if err != nil {
 		return
 	}
