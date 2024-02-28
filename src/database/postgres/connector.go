@@ -7,7 +7,7 @@ import (
 )
 
 func Connect() *gorm.DB {
-	dsn := ""
+	dsn := "'"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
