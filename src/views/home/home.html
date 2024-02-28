@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Document</title>
+</head>
+<body class="text-gray-600 font-body">
+<div class="grid md:grid-cols-3">
+    <div class="bg-white md:col-span-1 md:flex md:justify-end">
+        <nav class="text-right">
+            <div class="flex justify-between items-center">
+                <h1 class="font-bold uppercase p-4 border-b-2 border-gray-200 hover:text-gray-800">
+                    <a href="/">Oração Bandas</a>
+                </h1>
+                <div class="px-4 cursor-pointer md:hidden" id="burger">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+                </div>
+            </div>
+            <ul class="mt-4 hidden md:block" id="menu">
+                <li class="text-gray-700 border-r-4 border-red-600">
+                    <a href="#" class="anchor">
+                        <span>
+                            Home
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6 inline">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-2 border-r-4 border-white">
+                    <a href="#" class="anchor">
+                        <span>
+                            Lista
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6 inline">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-2 border-r-4 border-white">
+                    <a href="#" class="anchor">
+                        <span>
+                            Sobre
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6 inline">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+                <li class="mt-2 border-r-4 border-white">
+                    <a href="#" class="anchor">
+                        <span>
+                            Contato
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="w-6 h-6 inline">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+                            </svg>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="px-16 bg-gray-50 py-6 md:col-span-2 h-dvh">
+        <div class="flex justify-center md:justify-end">
+            <a class="btn" href="#">Login</a>
+            <a class="btn" href="#">Cadastro</a>
+        </div>
+
+        <header class="py-6">
+            <h2 class="text-gray-700 text-6xl font-semibold">Em oração</h2>
+            <h3 class="text-gray-500 text-2xl font-semibold">Por todos, em comunhão</h3>
+        </header>
+
+        <div>
+            <h3 class="font-bold mt-12 pb-2 border-b-2 border-grey-200">Ultimas bandas</h3>
+
+            <div class="mt-8 grid lg:grid-cols-3 md:grid-cols-1"> <!-- cards goes here -->
+                <div class="card">
+                    <img class="w-full h-fit object-cover"
+                         src="https://roadiecrew.com/wp-content/uploads/big_thumb_601dfb683a3abf97393258f2946b6fa4.jpg"
+                         alt="Nome da banda">
+                    <div class="m-4">
+                        <span class="font-semibold">Epica</span>
+                        <span class="block text-gray-500 text-sm">Descrição da banda</span>
+                    </div>
+                    <div class="badge">
+                        <span>
+                            <svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/>
+                            </svg>
+                            2002
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="w-full h-fit object-cover"
+                         src="https://roadie-metal.com/wp-content/uploads/2023/08/367036228_851886876297136_6510508356114657826_n.jpg"
+                         alt="Nome da banda">
+                    <div class="m-4">
+                        <span class="font-semibold">Within Temptation</span>
+                        <span class="block text-gray-500 text-sm">Descrição da banda</span>
+                    </div>
+                    <div class="badge">
+                        <span>
+                            <svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/>
+                            </svg>
+                            1995
+                        </span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img class="w-full h-fit object-cover"
+                         src="https://advancelocal-adapter-image-uploads.s3.amazonaws.com/image.mlive.com/home/mlive-media/width2048/img/entertainmentnow_impact/photo/lacuna-coil-by-katja-kuhl-2012jpg-c388610fd1edf561.jpg"
+                         alt="Nome da banda">
+                    <div class="m-4">
+                        <span class="font-semibold">Lacuna Coil</span>
+                        <span class="block text-gray-500 text-sm">Descrição da banda</span>
+                    </div>
+                    <div class="badge">
+                        <span>
+                            <svg class="w-4 h-4 inline" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"/>
+                            </svg>
+                            2004
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="font-bold mt-12 pb-2 border-b-2 border-gray-200">Mais acessadas</h3>
+
+            <div class="mt-8">
+                <!-- cards goes here -->
+            </div>
+
+            <div>
+                <div class="flex justify-center">
+                    <span class="btn">Load more</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="../../static/index.js"></script>
+</body>
+</html>
