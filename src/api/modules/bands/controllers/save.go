@@ -3,8 +3,8 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"oracao-bandas.com/src/modules/bands/services"
-	"oracao-bandas.com/src/modules/bands/structs"
+	"oracao-bandas.com/src/api/modules/bands/services"
+	"oracao-bandas.com/src/api/modules/bands/structs"
 )
 
 func Save(context *gin.Context) {
