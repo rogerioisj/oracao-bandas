@@ -4,10 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"oracao-bandas.com/src/api/modules/bands"
 	"oracao-bandas.com/src/api/modules/home"
+	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/controllers"
 )
 
-func StartServer() {
+func StartServer(config *configuration.Configuration) {
 	router := gin.Default()
 
 	router.LoadHTMLGlob("src/views/**/*")
@@ -20,7 +21,7 @@ func StartServer() {
 
 	router.GET("/", controllers.Home)
 
-	err := router.Run(":8000")
+	err := router.Run(config.System.Port)
 	if err != nil {
 		return
 	}
