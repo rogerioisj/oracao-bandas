@@ -6,8 +6,8 @@ import (
 )
 
 type BandRepositoryInterface interface {
-	Save(dto *structs.SaveBandDto) entities.Band
-	Update(dto *structs.UpdateBandDto) entities.Band
-	Get(id string) entities.Band
-	List(page int, number int) []entities.Band
+	Save(dto *entities.Band) error
+	Update(dto *structs.UpdateBandDto)
+	Get(id string)
+	List(page int, number int)
 }
