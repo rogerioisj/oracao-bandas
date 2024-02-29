@@ -14,5 +14,5 @@ func main() {
 
 	orm.LoadEntities(db)
 
-	server.StartServer(&config)
+	server.StartServer(&config, db)
 }
