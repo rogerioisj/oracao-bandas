@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/modules"
-	"oracao-bandas.com/src/modules/home/controllers"
 )
 
 func StartServer(config *configuration.Configuration, db *gorm.DB) {
@@ -21,11 +20,9 @@ func StartServer(config *configuration.Configuration, db *gorm.DB) {
 	router.LoadHTMLGlob("src/views/**/*")
 	router.Static("/static", "src/static/")
 
-	api := router.Group("api")
+	api := router.Group("/")
 
 	modules.InitModules(api, db)
-
-	router.GET("/", controllers.Home)
 
 	err := router.Run(config.System.Port)
 	if err != nil {
