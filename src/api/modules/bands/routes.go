@@ -5,8 +5,8 @@ import (
 	"oracao-bandas.com/src/api/modules/bands/controllers"
 )
 
-func SetupRoutes(router *gin.RouterGroup) {
+func SetupRoutes(router *gin.RouterGroup, controller controllers.SaveBandControllerInterface) {
 	bands := router.Group("bands")
 
-	bands.POST("", controllers.Save)
+	bands.POST("", controller.Save)
 }
