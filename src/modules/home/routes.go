@@ -3,6 +3,7 @@ package home
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"oracao-bandas.com/src/modules/home/controllers"
 	"time"
 )
 
@@ -13,8 +14,7 @@ func HealthCheck(c *gin.Context) {
 	})
 }
 
-func SetupRoutes(router *gin.RouterGroup) {
-	home := router.Group("home")
-
-	home.GET("/health", HealthCheck)
+func SetupRoutes(router *gin.RouterGroup, controller controllers.HomeControllerInterface) {
+	router.GET("/home/health", HealthCheck)
+	router.GET("", controller.Home)
 }
