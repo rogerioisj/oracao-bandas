@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+	"html/template"
 	"oracao-bandas.com/src/api/modules"
 	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/controllers"
@@ -10,6 +11,12 @@ import (
 
 func StartServer(config *configuration.Configuration, db *gorm.DB) {
 	router := gin.Default()
+
+	router.SetFuncMap(template.FuncMap{
+		"isEven": func(value int) bool {
+			return value%2 == 0
+		},
+	})
 
 	router.LoadHTMLGlob("src/views/**/*")
 	router.Static("/static", "src/static/")
