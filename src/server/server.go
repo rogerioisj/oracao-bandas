@@ -5,8 +5,8 @@ import (
 	"gorm.io/gorm"
 	"html/template"
 	"oracao-bandas.com/src/configuration"
-	"oracao-bandas.com/src/controllers"
 	"oracao-bandas.com/src/modules"
+	"oracao-bandas.com/src/modules/home/controllers"
 )
 
 func StartServer(config *configuration.Configuration, db *gorm.DB) {
