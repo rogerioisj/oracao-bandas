@@ -105,24 +105,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="tr-even">
-                        <td class="p-3">Epica</td>
-                        <td class="td">Banda</td>
-                        <td class="td">Banda</td>
-                        <td class="td">29/02/2024</td>
-                    </tr>
-                    <tr class="tr-odd">
-                        <td class="td">Lacuna Coil</td>
-                        <td class="td">Banda</td>
+                    {{ range $index, $element := .data }}
+                    <tr class="{{ if isEven $index }}tr-even{{ else }}tr-odd{{ end }}">
+                        <td class="td">{{ $element.Text }}</td>
+                        <td class="td">{{ $index }}</td>
                         <td class="td">Banda</td>
                         <td class="td">29/02/2024</td>
                     </tr>
-                    <tr class="tr-even">
-                        <td class="td">Within Temptation</td>
-                        <td class="td">Banda</td>
-                        <td class="td">Banda</td>
-                        <td class="td">29/02/2024</td>
-                    </tr>
+                    {{ end }}
                     </tbody>
                 </table>
             </div>
