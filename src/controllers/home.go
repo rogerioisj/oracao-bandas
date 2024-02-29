@@ -10,11 +10,17 @@ type Message struct {
 }
 
 func Home(ctx *gin.Context) {
-	data := Message{
-		Text: "Ronaldo!",
+	data := [...]Message{
+		Message{
+			Text: "Ronaldo!",
+		},
+		Message{
+			Text: "Brilha muito no curintinhans!",
+		},
 	}
 
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
-		"Message": data,
-	})
+		"data": data,
+	},
+	)
 }

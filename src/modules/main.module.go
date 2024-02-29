@@ -3,8 +3,8 @@ package modules
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"oracao-bandas.com/src/api/modules/bands"
-	"oracao-bandas.com/src/api/modules/home"
+	"oracao-bandas.com/src/modules/bands"
+	"oracao-bandas.com/src/modules/home"
 )
 
 func InitModules(api *gin.RouterGroup, database *gorm.DB) {

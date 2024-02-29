@@ -4,9 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"html/template"
-	"oracao-bandas.com/src/api/modules"
 	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/controllers"
+	"oracao-bandas.com/src/modules"
 )
 
 func StartServer(config *configuration.Configuration, db *gorm.DB) {

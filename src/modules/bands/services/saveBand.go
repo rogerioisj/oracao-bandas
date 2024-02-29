@@ -1,9 +1,9 @@
 package services
 
 import (
-	"oracao-bandas.com/src/api/modules/bands/structs"
 	"oracao-bandas.com/src/database/resources/bands/entities"
 	"oracao-bandas.com/src/database/resources/bands/repositories"
+	"oracao-bandas.com/src/modules/bands/structs"
 )
 
 type SaveBandServiceInterface interface {

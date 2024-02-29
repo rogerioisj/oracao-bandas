@@ -2,7 +2,7 @@ package bands
 
 import (
 	"github.com/gin-gonic/gin"
-	"oracao-bandas.com/src/api/modules/bands/controllers"
+	"oracao-bandas.com/src/modules/bands/controllers"
 )
 
 func SetupRoutes(router *gin.RouterGroup, controller controllers.SaveBandControllerInterface) {
