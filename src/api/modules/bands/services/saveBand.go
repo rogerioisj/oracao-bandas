@@ -29,14 +29,6 @@ func (service *SaveBandService) SaveBand(band *structs.SaveBandDto) (error, enti
 	savedBand.Type = band.Type
 	savedBand.UF = band.UF
 
-	//TODO: Inject connection
-
-	/*response := postgres.Connect().Save(&savedBand)
-
-	if response.Error != nil {
-		return response.Error, entities.Band{}
-	}*/
-
 	err := service.repository.Save(&savedBand)
 
 	if err != nil {
