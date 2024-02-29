@@ -2,13 +2,13 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"oracao-bandas.com/src/api/modules/bands"
-	"oracao-bandas.com/src/api/modules/home"
+	"gorm.io/gorm"
+	"oracao-bandas.com/src/api/modules"
 	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/controllers"
 )
 
-func StartServer(config *configuration.Configuration) {
+func StartServer(config *configuration.Configuration, db *gorm.DB) {
 	router := gin.Default()
 
 	router.LoadHTMLGlob("src/views/**/*")
@@ -16,8 +16,7 @@ func StartServer(config *configuration.Configuration) {
 
 	api := router.Group("api")
 
-	home.SetupRoutes(api)
-	bands.SetupRoutes(api)
+	modules.InitModules(api, db)
 
 	router.GET("/", controllers.Home)
 
