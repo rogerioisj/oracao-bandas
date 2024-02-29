@@ -17,6 +17,9 @@ type Configuration struct {
 		Port     int
 		SSL      string
 	}
+	System struct {
+		Port string
+	}
 }
 
 type DevConfiguration struct {
@@ -25,9 +28,13 @@ type DevConfiguration struct {
 		User     string `json:"user"`
 		Password string `json:"password"`
 		DBName   string `json:"dbname"`
-		Port     int    `json:"port"`
+		Port     int    `json:"db_port"`
 		SSL      string `json:"ssl"`
 	} `json:"database"`
+
+	System struct {
+		Port string `json:"port"`
+	} `json:"system"`
 }
 
 func LoadEnvironmentVars() (Configuration, error) {
@@ -76,6 +83,7 @@ func loadDevEnvironmentVars(config *Configuration) error {
 	config.Database.Port = devConfig.Database.Port
 	config.Database.User = devConfig.Database.User
 	config.Database.SSL = devConfig.Database.SSL
+	config.System.Port = devConfig.System.Port
 
 	return nil
 }
@@ -85,15 +93,18 @@ func loadEnvironment(config *Configuration) {
 	user := os.Getenv("DB_USER")
 	password := os.Getenv("DB_PASSWORD")
 	dbname := os.Getenv("DB_NAME")
-	port := os.Getenv("DB_PORT")
+	dbPort := os.Getenv("DB_PORT")
 	ssl := os.Getenv("DB_SSL")
 
-	parsedPort, _ := strconv.Atoi(port)
+	port := os.Getenv("PORT")
+
+	parsedDbPort, _ := strconv.Atoi(dbPort)
 
 	config.Database.Host = host
 	config.Database.User = user
 	config.Database.Password = password
 	config.Database.DBName = dbname
-	config.Database.Port = parsedPort
+	config.Database.Port = parsedDbPort
 	config.Database.SSL = ssl
+	config.System.Port = port
 }
