@@ -2,7 +2,6 @@ package services
 
 import (
 	"oracao-bandas.com/src/api/modules/bands/structs"
-	"oracao-bandas.com/src/database/postgres"
 	"oracao-bandas.com/src/database/resources/bands/entities"
 )
 
@@ -15,11 +14,13 @@ func SaveBand(band *structs.SaveBandDto) (error, entities.Band) {
 	savedBand.Type = band.Type
 	savedBand.UF = band.UF
 
-	response := postgres.Connect().Save(&savedBand)
+	//TODO: Inject connection
+
+	/*response := postgres.Connect().Save(&savedBand)
 
 	if response.Error != nil {
 		return response.Error, entities.Band{}
-	}
+	}*/
 
 	return nil, savedBand
 }
