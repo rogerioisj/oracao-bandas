@@ -33,7 +33,7 @@ type DevConfiguration struct {
 	} `json:"database"`
 
 	System struct {
-		Port string `json:"port"`
+		Port string `json:"system_port"`
 	} `json:"system"`
 }
 
@@ -96,7 +96,7 @@ func loadEnvironment(config *Configuration) {
 	dbPort := os.Getenv("DB_PORT")
 	ssl := os.Getenv("DB_SSL")
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("SYSTEM_PORT")
 
 	parsedDbPort, _ := strconv.Atoi(dbPort)
 
