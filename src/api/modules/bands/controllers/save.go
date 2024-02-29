@@ -7,7 +7,21 @@ import (
 	"oracao-bandas.com/src/api/modules/bands/structs"
 )
 
-func Save(context *gin.Context) {
+type SaveBandControllerInterface interface {
+	Save(context *gin.Context)
+}
+
+type SaveBandController struct {
+	service services.SaveBandServiceInterface
+}
+
+func NewSaveBandController(service services.SaveBandServiceInterface) *SaveBandController {
+	return &SaveBandController{
+		service: service,
+	}
+}
+
+func (controller *SaveBandController) Save(context *gin.Context) {
 	var band structs.SaveBandDto
 
 	dtoError := context.ShouldBindJSON(&band)
@@ -18,7 +32,7 @@ func Save(context *gin.Context) {
 		})
 	}
 
-	serviceError, serviceReturn := services.SaveBand(&band)
+	serviceError, serviceReturn := controller.service.SaveBand(&band)
 
 	if serviceError != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
