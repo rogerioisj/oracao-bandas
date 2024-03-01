@@ -28,8 +28,8 @@ func (h HomeController) Home(ctx *gin.Context) {
 	lastBands := h.service.LoadLastBands()
 
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
-		"lastBands":  lastBands,
-		"queryBands": lastBands,
+		"lastBands":  &lastBands,
+		"queryBands": &lastBands,
 	},
 	)
 }
