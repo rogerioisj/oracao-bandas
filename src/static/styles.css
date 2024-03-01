@@ -548,6 +548,14 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.invisible{
+  visibility: hidden;
+}
+
+.collapse{
+  visibility: collapse;
+}
+
 .m-4{
   margin: 1rem;
 }
@@ -710,10 +718,6 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.text-left{
-  text-align: left;
-}
-
 .text-right{
   text-align: right;
 }
@@ -747,14 +751,6 @@ video {
 
 .uppercase{
   text-transform: uppercase;
-}
-
-.tracking-wide{
-  letter-spacing: 0.025em;
-}
-
-.tracking-wider{
-  letter-spacing: 0.05em;
 }
 
 .text-gray-500{
@@ -874,7 +870,35 @@ video {
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
+@media not all and (min-width: 768px){
+  .max-md\:hidden{
+    display: none;
+  }
+}
+
+@media not all and (min-width: 640px){
+  .max-sm\:hidden{
+    display: none;
+  }
+}
+
+@media (min-width: 640px){
+  .sm\:hidden{
+    display: none;
+  }
+
+  @media not all and (min-width: 768px){
+    .sm\:max-md\:hidden{
+      display: none;
+    }
+  }
+}
+
 @media (min-width: 768px){
+  .md\:visible{
+    visibility: visible;
+  }
+
   .md\:col-span-1{
     grid-column: span 1 / span 1;
   }
