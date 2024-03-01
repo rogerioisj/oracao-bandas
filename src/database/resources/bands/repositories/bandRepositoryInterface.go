@@ -9,5 +9,5 @@ type BandRepositoryInterface interface {
 	Save(dto *entities.Band) error
 	Update(dto *structs.UpdateBandDto)
 	Get(id string)
-	List(page int, number int)
+	List(page int, number int) ([]entities.Band, error)
 }
