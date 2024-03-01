@@ -1,6 +1,7 @@
 package services
 
 import (
+	"log"
 	"oracao-bandas.com/src/database/resources/bands/entities"
 	"oracao-bandas.com/src/database/resources/bands/repositories"
 	"oracao-bandas.com/src/modules/bands/structs"
@@ -8,6 +9,7 @@ import (
 
 type SaveBandServiceInterface interface {
 	SaveBand(band *structs.SaveBandDto) (error, entities.Band)
+	LoadLastBands() []entities.Band
 }
 
 type SaveBandService struct {
@@ -36,4 +38,14 @@ func (service *SaveBandService) SaveBand(band *structs.SaveBandDto) (error, enti
 	}
 
 	return nil, savedBand
+}
+
+func (service *SaveBandService) LoadLastBands() []entities.Band {
+	bands, err := service.repository.List(1, 3)
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	return bands
 }
