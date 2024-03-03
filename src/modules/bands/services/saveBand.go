@@ -10,6 +10,7 @@ import (
 type SaveBandServiceInterface interface {
 	SaveBand(band *structs.SaveBandDto) (error, entities.Band)
 	LoadLastBands() []entities.Band
+	SearchBands(page int, number int) []entities.Band
 }
 
 type SaveBandService struct {
@@ -42,6 +43,16 @@ func (service *SaveBandService) SaveBand(band *structs.SaveBandDto) (error, enti
 
 func (service *SaveBandService) LoadLastBands() []entities.Band {
 	bands, err := service.repository.List(1, 3)
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	return bands
+}
+
+func (service *SaveBandService) SearchBands(page int, number int) []entities.Band {
+	bands, err := service.repository.List(page, number)
 
 	if err != nil {
 		log.Panic(err)
