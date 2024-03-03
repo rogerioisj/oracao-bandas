@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"oracao-bandas.com/src/database/resources/bands/entities"
 	"oracao-bandas.com/src/modules/bands/services"
@@ -29,6 +30,8 @@ func NewHomeController(service services.SaveBandServiceInterface) *HomeControlle
 func (h HomeController) Home(ctx *gin.Context) {
 	lastBands := h.service.LoadLastBands()
 	var loadedBands []entities.Band
+	var total int
+	var maxPage int
 
 	query := ctx.Request.URL.Query()
 
@@ -43,13 +46,26 @@ func (h HomeController) Home(ctx *gin.Context) {
 		itens = 5
 	}
 
-	loadedBands = h.service.SearchBands(page, itens)
+	loadedBands, total = h.service.SearchBands(page, itens)
+
+	maxPage = total / itens
+
+	i := total % itens
+	if i > 0 {
+		maxPage += 1
+	}
+
+	log.Printf("Itens: %v", total)
+	log.Printf("Total itens: %v", total)
+	log.Printf("Max page: %v", maxPage)
+	log.Printf("Page: %v", page)
 
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
 		"lastBands":  &lastBands,
 		"queryBands": &loadedBands,
 		"page":       &page,
 		"itens":      &itens,
+		"maxPage":    &maxPage,
 	},
 	)
 }
