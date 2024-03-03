@@ -130,7 +130,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{ range $index, $element := .lastBands }}
+                    {{ range $index, $element := .queryBands }}
                     <tr class="{{ if isEven $index }}tr-even{{ else }}tr-odd{{ end }}">
                         <td class="td">{{ $element.Title }}</td>
                         <td class="td max-md:hidden">{{ $element.Type }}</td>
