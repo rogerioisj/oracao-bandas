@@ -120,6 +120,7 @@
             <h3 class="font-bold mt-12 pb-2 border-b-2 border-gray-200">Lista</h3>
 
             <div class="mt-8 w-full flex overflow-hidden shadow-md">
+                {{if greaterThan .queryBands 1 }}
                 <table class="table-auto w-full">
                     <thead class="bg-gray-50 border-b-2 border-gray-200">
                     <tr>
@@ -140,6 +141,9 @@
                     {{ end }}
                     </tbody>
                 </table>
+                {{ else }}
+                <h1> Nenhuma banda encontrada </h1>
+                {{ end }}
             </div>
 
             <div class="mt-8 mb-8">
