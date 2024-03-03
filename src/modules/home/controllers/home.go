@@ -45,10 +45,6 @@ func (h HomeController) Home(ctx *gin.Context) {
 
 	loadedBands = h.service.SearchBands(page, itens)
 
-	if len(loadedBands) < 1 {
-		loadedBands = lastBands
-	}
-
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
 		"lastBands":  &lastBands,
 		"queryBands": &loadedBands,
