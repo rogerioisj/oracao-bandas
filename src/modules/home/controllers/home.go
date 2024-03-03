@@ -48,6 +48,8 @@ func (h HomeController) Home(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
 		"lastBands":  &lastBands,
 		"queryBands": &loadedBands,
+		"page":       &page,
+		"itens":      &itens,
 	},
 	)
 }
