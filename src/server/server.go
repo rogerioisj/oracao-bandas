@@ -19,8 +19,8 @@ func StartServer(config *configuration.Configuration, db *gorm.DB) {
 		"greaterThanArray": func(array []entities.Band, value int) bool { return len(array) > value },
 		"minusThan":        func(value1, value2 int) bool { return value1 < value2 },
 		"greaterThan":      func(value1, value2 int) bool { return value1 > value2 },
-		"sub":              func(value1 int, value2 int) int { return value1 - value2 },
-		"add":              func(value1 int, value2 int) int { return value1 + value2 },
+		"sub":              func(value1, value2 int) int { return value1 - value2 },
+		"add":              func(value1, value2 int) int { return value1 + value2 },
 	})
 
 	router.LoadHTMLGlob("src/views/**/*")
