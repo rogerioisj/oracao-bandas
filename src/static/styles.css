@@ -548,16 +548,12 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.invisible{
-  visibility: hidden;
-}
-
-.collapse{
-  visibility: collapse;
-}
-
 .m-4{
   margin: 1rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
 }
 
 .mt-12{
@@ -574,14 +570,6 @@ video {
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.mb-8{
-  margin-bottom: 2rem;
-}
-
-.mb-16{
-  margin-bottom: 4rem;
 }
 
 .block{
@@ -649,6 +637,14 @@ video {
   align-items: center;
 }
 
+.justify-start{
+  justify-content: flex-start;
+}
+
+.justify-end{
+  justify-content: flex-end;
+}
+
 .justify-center{
   justify-content: center;
 }
@@ -697,10 +693,6 @@ video {
 .object-cover{
   -o-object-fit: cover;
   object-fit: cover;
-}
-
-.p-3{
-  padding: 0.75rem;
 }
 
 .p-4{
@@ -884,29 +876,7 @@ video {
   }
 }
 
-@media not all and (min-width: 640px){
-  .max-sm\:hidden{
-    display: none;
-  }
-}
-
-@media (min-width: 640px){
-  .sm\:hidden{
-    display: none;
-  }
-
-  @media not all and (min-width: 768px){
-    .sm\:max-md\:hidden{
-      display: none;
-    }
-  }
-}
-
 @media (min-width: 768px){
-  .md\:visible{
-    visibility: visible;
-  }
-
   .md\:col-span-1{
     grid-column: span 1 / span 1;
   }
@@ -933,6 +903,10 @@ video {
 
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:justify-start{
+    justify-content: flex-start;
   }
 
   .md\:justify-end{
