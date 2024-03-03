@@ -32,10 +32,11 @@ func (repository *PostgresBandRepository) Get(id string) {
 
 }
 
-func (repository *PostgresBandRepository) List(page int, number int) ([]entities.Band, error) {
+func (repository *PostgresBandRepository) List(page, number int) ([]entities.Band, int, error) {
 	log.Printf("Listing bands for page: %v and number: %v", page, number)
 
 	var bands []entities.Band
+	var total int64
 
 	var offset int
 
@@ -45,12 +46,15 @@ func (repository *PostgresBandRepository) List(page int, number int) ([]entities
 		offset = (page - 1) * number
 	}
 
-	response := repository.db.Order("created_at desc").Order("title").Offset(offset).Limit(number).Find(&bands)
+	response := repository.db.Order("created_at desc").Order("title").Offset(offset).Limit(number).Find(&bands).Count(&total)
+	_ = repository.db.Model(entities.Band{}).Count(&total)
 
 	if response.Error != nil {
 		log.Printf("Error to load Bands. Details: %s", response.Error)
-		return nil, response.Error
+		return nil, 0, response.Error
 	}
 
-	return bands, nil
+	newTotal := int(total)
+
+	return bands, newTotal, nil
 }
