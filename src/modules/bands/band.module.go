@@ -8,9 +8,11 @@ import (
 	"oracao-bandas.com/src/modules/bands/services"
 )
 
-func InitBandModule(group *gin.RouterGroup, database *gorm.DB) {
+func InitBandModule(group *gin.RouterGroup, database *gorm.DB) *services.SaveBandService {
 	bandRepository := repositories.NewPostgresBandRepository(database)
 	bandService := services.NewSaveBandService(bandRepository)
 	saveBandController := controllers.NewSaveBandController(bandService)
 	SetupRoutes(group, saveBandController)
+
+	return bandService
 }
