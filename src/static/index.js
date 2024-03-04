@@ -10,3 +10,15 @@ const showMenu = () => {
 };
 
 burger.addEventListener('click', showMenu);
+
+const openModalButton = document.querySelector('#open-login-modal');
+const modal = document.querySelector('#login-modal');
+const closeModalButton = document.querySelector('#close-login-modal');
+
+openModalButton.addEventListener('click', () => {
+    modal.showModal();
+});
+
+closeModalButton.addEventListener('click', () => {
+    modal.close();
+});
