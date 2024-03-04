@@ -55,7 +55,7 @@ func (h HomeController) Home(ctx *gin.Context) {
 		maxPage += 1
 	}
 
-	log.Printf("Itens: %v", total)
+	log.Printf("Itens: %v", itens)
 	log.Printf("Total itens: %v", total)
 	log.Printf("Max page: %v", maxPage)
 	log.Printf("Page: %v", page)
