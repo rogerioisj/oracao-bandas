@@ -10,8 +10,8 @@ import (
 func InitModules(api *gin.RouterGroup, database *gorm.DB) {
 	//API Modules
 	group := api.Group("api")
-	bands.InitBandModule(group, database)
+	bandService := bands.InitBandModule(group, database)
 
 	//MVC Modules
-	home.InitHomeModule(api, database)
+	home.InitHomeModule(api, bandService)
 }
