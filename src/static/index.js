@@ -11,14 +11,26 @@ const showMenu = () => {
 
 burger.addEventListener('click', showMenu);
 
-const openModalButton = document.querySelector('#open-login-modal');
-const modal = document.querySelector('#login-modal');
-const closeModalButton = document.querySelector('#close-login-modal');
+const openLoginModalButton = document.querySelector('#open-login-modal');
+const loginModal = document.querySelector('#login-modal');
+const closeLoginModalButton = document.querySelector('#close-login-modal');
 
-openModalButton.addEventListener('click', () => {
-    modal.showModal();
+openLoginModalButton.addEventListener('click', () => {
+    loginModal.showModal();
 });
 
-closeModalButton.addEventListener('click', () => {
-    modal.close();
+closeLoginModalButton.addEventListener('click', () => {
+    loginModal.close();
+});
+
+const openRegisterModalButton = document.querySelector('#open-band-modal');
+const registerModal = document.querySelector('#band-modal');
+const closeRegisterModalButton = document.querySelector('#close-band-modal');
+
+openRegisterModalButton.addEventListener('click', () => {
+    registerModal.showModal();
+});
+
+closeRegisterModalButton.addEventListener('click', () => {
+    registerModal.close();
 });
