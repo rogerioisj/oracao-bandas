@@ -17,4 +17,5 @@ func HealthCheck(c *gin.Context) {
 func SetupRoutes(router *gin.RouterGroup, controller controllers.HomeControllerInterface) {
 	router.GET("/home/health", HealthCheck)
 	router.GET("", controller.Home)
+	router.POST("/band", controller.SaveBand)
 }

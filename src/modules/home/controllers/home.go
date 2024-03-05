@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"oracao-bandas.com/src/database/resources/bands/entities"
 	"oracao-bandas.com/src/modules/bands/services"
+	"oracao-bandas.com/src/modules/bands/structs"
 	"strconv"
 )
 
@@ -15,6 +16,7 @@ type Message struct {
 
 type HomeControllerInterface interface {
 	Home(context *gin.Context)
+	SaveBand(context *gin.Context)
 }
 
 type HomeController struct {
@@ -68,4 +70,19 @@ func (h HomeController) Home(ctx *gin.Context) {
 		"maxPage":    &maxPage,
 	},
 	)
+}
+
+func (h HomeController) SaveBand(ctx *gin.Context) {
+	name := ctx.PostForm("name")
+	bandType := ctx.PostForm("type")
+	country := ctx.PostForm("country")
+
+	dto := structs.SaveBandDto{Title: name, Country: country, Type: bandType}
+
+	err, _ := h.service.SaveBand(&dto)
+	if err != nil {
+		return
+	}
+
+	ctx.Redirect(http.StatusFound, "/")
 }
