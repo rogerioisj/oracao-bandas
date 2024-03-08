@@ -47,7 +47,7 @@ func (repository *PostgresBandRepository) List(page, number int, name string) ([
 	}
 
 	response := repository.db.Order("created_at desc").Order("title").Offset(offset).Limit(number).Where("LOWER(title) LIKE LOWER(?)", "%"+name+"%").Find(&bands).Count(&total)
-	_ = repository.db.Model(entities.Band{}).Count(&total)
+	_ = repository.db.Model(entities.Band{}).Where("LOWER(title) LIKE LOWER(?)", "%"+name+"%").Count(&total)
 
 	if response.Error != nil {
 		log.Printf("Error to load Bands. Details: %s", response.Error)
