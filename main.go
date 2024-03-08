@@ -8,7 +8,11 @@ import (
 )
 
 func main() {
-	config, _ := configuration.LoadEnvironmentVars()
+	config, err := configuration.LoadEnvironmentVars()
+
+	if err != nil {
+		panic(err)
+	}
 
 	db := postgres.Connect(&config)
 
