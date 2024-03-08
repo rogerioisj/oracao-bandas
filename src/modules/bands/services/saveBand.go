@@ -2,8 +2,8 @@ package services
 
 import (
 	"log"
-	"oracao-bandas.com/src/database/resources/bands/entities"
-	"oracao-bandas.com/src/database/resources/bands/repositories"
+	"oracao-bandas.com/src/database/entities"
+	"oracao-bandas.com/src/database/repositories"
 	"oracao-bandas.com/src/modules/bands/structs"
 )
 

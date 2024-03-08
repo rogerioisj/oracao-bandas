@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 	"html/template"
 	"oracao-bandas.com/src/configuration"
-	"oracao-bandas.com/src/database/resources/bands/entities"
+	"oracao-bandas.com/src/database/entities"
 	"oracao-bandas.com/src/modules"
 )
 

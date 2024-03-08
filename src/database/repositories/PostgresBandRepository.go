@@ -3,7 +3,7 @@ package repositories
 import (
 	"gorm.io/gorm"
 	"log"
-	"oracao-bandas.com/src/database/resources/bands/entities"
+	"oracao-bandas.com/src/database/entities"
 	"oracao-bandas.com/src/modules/bands/structs"
 )
 

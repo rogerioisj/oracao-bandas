@@ -3,7 +3,7 @@ package bands
 import (
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
-	"oracao-bandas.com/src/database/resources/bands/repositories"
+	"oracao-bandas.com/src/database/repositories"
 	"oracao-bandas.com/src/modules/bands/controllers"
 	"oracao-bandas.com/src/modules/bands/services"
 )

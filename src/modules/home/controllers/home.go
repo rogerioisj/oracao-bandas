@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"oracao-bandas.com/src/database/resources/bands/entities"
+	"oracao-bandas.com/src/database/entities"
 	"oracao-bandas.com/src/modules/bands/services"
 	"oracao-bandas.com/src/modules/bands/structs"
 	"strconv"
