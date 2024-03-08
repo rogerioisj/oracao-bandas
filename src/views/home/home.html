@@ -44,12 +44,7 @@
                 {{ end }}
             </div>
 
-            <div class="mt-8 mb-8">
-                <div class="flex justify-center md:justify-start">
-                    <a href="/?page={{ sub .page 1}}&itens={{ .itens }}" class="btn{{ if minusThan .page 2 }} invisible {{ end }}">Anterior</a>
-                    <a href="/?page={{ add .page 1}}&itens={{ .itens }}" class="btn {{ if minusOrEqualThan .maxPage .page }} invisible {{ end }}">Próximo</a>
-                </div>
-            </div>
+            {{template "list nav buttons" .}}
         </div>
     </main>
 </div>
