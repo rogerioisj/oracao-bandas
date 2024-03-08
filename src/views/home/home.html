@@ -81,48 +81,8 @@
     </div>
 
     <main class="px-16 bg-gray-50 py-6 md:col-span-2 h-dvh">
-        <dialog data-modal class="modal" id="login-modal">
-            <div class="m-8">
-                <h1 class="modal-header">Login</h1>
-                <div class="mt-2">
-                    <form action="/" method="POST">
-                        <div class="m-2">
-                            <label for="login-email">Email</label><br>
-                            <input type="email" id="login-email" name="Email" placeholder="Email" class="modal-input"><br>
-                        </div>
-                        <div class="m-2">
-                            <label for="login-password" class="mt-2">Senha</label><br>
-                            <input type="password" id="login-password" name="Senha" placeholder="Senha" required class="modal-input">
-                        </div>
-                        <button data-close-modal class="btn mt-2" id="close-login-modal">Cancelar</button>
-                        <button data-close-modal class="btn mt-2" type="submit">Login</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
-        <dialog data-modal class="modal" id="band-modal">
-            <div class="m-8">
-                <h1 class="modal-header">Cadastro</h1>
-                <div class="mt-2">
-                    <form action="/band" method="POST">
-                        <div class="m-2">
-                            <label for="login-email">Nome</label><br>
-                            <input type="text" id="banda-name" name="name" placeholder="Nome" required class="modal-input"><br>
-                        </div>
-                        <div class="m-2">
-                            <label for="login-password" class="mt-2">Tipo</label><br>
-                            <input type="text" id="band-type" name="type" placeholder="Tipo" required class="modal-input">
-                        </div>
-                        <div class="m-2">
-                            <label for="login-password" class="mt-2">País</label><br>
-                            <input type="text" id="band-country" name="country" placeholder="País" required class="modal-input">
-                        </div>
-                        <button data-close-modal class="btn mt-2" id="close-band-modal">Cancelar</button>
-                        <button data-close-modal class="btn mt-2" type="submit">Salvar</button>
-                    </form>
-                </div>
-            </div>
-        </dialog>
+        {{template "login modal"}}
+        {{template "band modal"}}
         <div class="flex justify-center md:justify-end">
             <a class="btn" data-open-modal id="open-login-modal">Login</a>
             <a class="btn" data-open-modal id="open-band-modal">Cadastro</a>
