@@ -39,6 +39,7 @@ func (h HomeController) Home(ctx *gin.Context) {
 
 	page, _ := strconv.Atoi(query.Get("page"))
 	itens, _ := strconv.Atoi(query.Get("itens"))
+	name := query.Get("name")
 
 	if page <= 0 {
 		page = 1
@@ -48,7 +49,7 @@ func (h HomeController) Home(ctx *gin.Context) {
 		itens = 5
 	}
 
-	loadedBands, total = h.service.SearchBands(page, itens)
+	loadedBands, total = h.service.SearchBands(page, itens, name)
 
 	maxPage = total / itens
 
