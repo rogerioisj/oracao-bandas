@@ -7,7 +7,7 @@ import (
 )
 
 func LoadEntities(database *gorm.DB) {
-	err := database.AutoMigrate(&entities.Band{}, &entities.User{})
+	err := database.AutoMigrate(&entities.Band{}, &entities.User{}, &entities.Session{})
 	if err != nil {
 		log.Fatalf("Error to load entities %s", err)
 	}
