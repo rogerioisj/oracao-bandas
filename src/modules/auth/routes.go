@@ -10,4 +10,5 @@ func SetupRoutes(router *gin.RouterGroup, controller controllers.AuthControllerI
 
 	authGroup.POST("register-user", controller.RegisterUser)
 	authGroup.POST("login", controller.Login)
+	authGroup.GET("logout", controller.Logout)
 }
