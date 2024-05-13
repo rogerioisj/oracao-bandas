@@ -11,7 +11,7 @@ import (
 type AuthServiceInterface interface {
 	CreateUser(dto *auth.CreateUserDto) error
 	Login(dto *auth.LoginDto) error
-	Logout()
+	Logout(sessionId string)
 }
 
 type AuthService struct {
@@ -82,7 +82,8 @@ func (service *AuthService) Login(dto *auth.LoginDto) (string, error) {
 	return parsedId, nil
 }
 
-func (service *AuthService) Logout() {
-	//TODO implement me
-	panic("implement me")
+func (service *AuthService) Logout(sessionId string) {
+	_ = service.sessionRepository.Delete(sessionId)
+
+	return
 }
