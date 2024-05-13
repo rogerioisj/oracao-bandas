@@ -35,9 +35,13 @@ func (repository *SessionRepository) Save(login string) (entities.Session, error
 }
 
 func (repository *SessionRepository) Delete(sessionId string) error {
-	log.Printf("Searching session: %s", sessionId)
+	log.Printf("Deleting session: %s", sessionId)
 
-	_ = repository.db.Delete(&entities.Session{}, sessionId)
+	record := repository.db.Where("id = ?", sessionId).Delete(&entities.Session{})
+
+	if record.Error != nil {
+		log.Panicf("Error to delete session: %s", record.Error.Error())
+	}
 
 	return nil
 }
