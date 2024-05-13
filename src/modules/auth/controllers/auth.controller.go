@@ -76,7 +76,7 @@ func (controller *AuthController) Login(context *gin.Context) {
 	dto.Login = login
 	dto.Password = password
 
-	err := controller.service.Login(&dto)
+	sessionData, err := controller.service.Login(&dto)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": "Error to create user",
@@ -84,10 +84,25 @@ func (controller *AuthController) Login(context *gin.Context) {
 		return
 	}
 
-	sessionToken := "session_token" // generate a unique session token, you may want to use UUID or JWT
+	sessionToken := sessionData
 	sessions[sessionToken] = dto.Login
 
-	context.SetCookie(cookieName, sessionToken, 3600, "/", "", false, true)
+	context.SetCookie(cookieName, sessionToken, 36000, "/", "", false, true)
+
+	context.Redirect(http.StatusFound, "/")
+}
+
+func (controller *AuthController) Logout(context *gin.Context) {
+	sessionToken, err := context.Cookie(cookieName)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": "No session found"})
+		return
+	}
+
+	controller.service.Logout(sessionToken)
+
+	// Clear cookie
+	context.SetCookie(cookieName, "", -1, "/", "", false, true)
 
 	context.Redirect(http.StatusFound, "/")
 }
