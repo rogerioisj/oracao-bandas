@@ -4,7 +4,7 @@ import (
 	"oracao-bandas.com/src/database/entities"
 )
 
-type AuthRepositoryInterface interface {
-	SearchByLogin(email, password string) (entities.Auth, error)
-	Register(name, email, password string) error
+type UserRepositoryInterface interface {
+	SearchByLogin(login string) (entities.User, error)
+	Register(name, login, password string) error
 }
