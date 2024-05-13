@@ -10,7 +10,7 @@ import (
 
 type AuthServiceInterface interface {
 	CreateUser(dto *auth.CreateUserDto) error
-	Login(dto *auth.LoginDto) error
+	Login(dto *auth.LoginDto) (string, error)
 	Logout(sessionId string)
 }
 
