@@ -9,8 +9,9 @@ import (
 )
 
 func InitAuthModule(group *gin.RouterGroup, database *gorm.DB) {
-	repository := repositories.NewUserRepository(database)
-	service := services.NewAuthService(repository)
+	userRepository := repositories.NewUserRepository(database)
+	sessionRepository := repositories.NewSessionRepository(database)
+	service := services.NewAuthService(userRepository, sessionRepository)
 	controller := controllers.NewAuthController(service)
 	SetupRoutes(group, controller)
 }
