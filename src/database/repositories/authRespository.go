@@ -41,9 +41,14 @@ func (repository *UserRepository) SearchByLogin(email string) (entities.User, er
 
 	var user entities.User
 
-	response := repository.db.First(&user, "login = ?", email)
+	response := repository.db.Limit(1).First(&user, "login = ?", email)
 
 	if response.Error != nil {
+
+		if response.Error.Error() == "record not found" {
+			return user, nil
+		}
+
 		log.Printf("Error trying to searching user. Details: %s", response.Error)
 		err := errors.New("DB error query")
 		return user, err
