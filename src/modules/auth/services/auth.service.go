@@ -15,17 +15,19 @@ type AuthServiceInterface interface {
 }
 
 type AuthService struct {
-	repository repositories.UserRepositoryInterface
+	userRepository    repositories.UserRepositoryInterface
+	sessionRepository repositories.SessionRepositoryInterface
 }
 
-func NewAuthService(repository repositories.UserRepositoryInterface) *AuthService {
+func NewAuthService(userRepository repositories.UserRepositoryInterface, sessionRepository repositories.SessionRepositoryInterface) *AuthService {
 	return &AuthService{
-		repository: repository,
+		userRepository:    userRepository,
+		sessionRepository: sessionRepository,
 	}
 }
 
 func (service *AuthService) CreateUser(dto *auth.CreateUserDto) error {
-	user, errSearch := service.repository.SearchByLogin(dto.Login)
+	user, errSearch := service.userRepository.SearchByLogin(dto.Login)
 
 	if errSearch != nil {
 		log.Printf("Error to search user %s", errSearch)
@@ -43,7 +45,7 @@ func (service *AuthService) CreateUser(dto *auth.CreateUserDto) error {
 		return errors.New("error to create user")
 	}
 
-	err = service.repository.Register(dto.Name, dto.Login, string(hashedPassword))
+	err = service.userRepository.Register(dto.Name, dto.Login, string(hashedPassword))
 
 	if err != nil {
 		log.Printf("Error to create user %s", err)
@@ -54,21 +56,30 @@ func (service *AuthService) CreateUser(dto *auth.CreateUserDto) error {
 	return nil
 }
 
-func (service *AuthService) Login(dto *auth.LoginDto) error {
-	user, err := service.repository.SearchByLogin(dto.Login)
+func (service *AuthService) Login(dto *auth.LoginDto) (string, error) {
+	user, err := service.userRepository.SearchByLogin(dto.Login)
 	if err != nil {
 		log.Print("User not found")
-		return err
+		return "", err
 	}
 
 	checkErr := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(dto.Password))
 
 	if checkErr != nil {
 		log.Printf("Wrong password for user %s", user.Login)
-		return errors.New("Wrong password")
+		return "", errors.New("Wrong password")
 	}
 
-	return nil
+	session, err := service.sessionRepository.Save(user.Login)
+
+	if err != nil {
+		log.Printf("Error to save session for %s", user.Login)
+		return "", errors.New("Error to save session")
+	}
+
+	parsedId := session.ID.String()
+
+	return parsedId, nil
 }
 
 func (service *AuthService) Logout() {
