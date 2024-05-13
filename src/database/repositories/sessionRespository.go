@@ -45,3 +45,17 @@ func (repository *SessionRepository) Delete(sessionId string) error {
 
 	return nil
 }
+
+func (repository *SessionRepository) Search(sessionId string) (entities.Session, error) {
+	log.Printf("Searching session: %s", sessionId)
+
+	var session entities.Session
+
+	record := repository.db.Where("id = ?", sessionId).Find(&session)
+
+	if record.Error != nil {
+		log.Panicf("Error to delete session: %s", record.Error.Error())
+	}
+
+	return session, nil
+}
