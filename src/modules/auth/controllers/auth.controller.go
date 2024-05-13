@@ -15,6 +15,7 @@ var (
 type AuthControllerInterface interface {
 	RegisterUser(context *gin.Context)
 	Login(context *gin.Context)
+	Logout(context *gin.Context)
 }
 
 type AuthController struct {
