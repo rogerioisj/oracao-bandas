@@ -1,8 +1,8 @@
 package entities
 
-type Auth struct {
+type User struct {
 	BaseEntity
 	Name     string `gorm:"type:varchar(150); NOT_NULL"`
-	Email    string `gorm:"type:varchar(150); unique; NOT_NULL"`
+	Login    string `gorm:"type:varchar(150); unique; NOT_NULL"`
 	Password string `gorm:"type:varchar(150); NOT_NULL"`
 }
