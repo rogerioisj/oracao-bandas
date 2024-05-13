@@ -25,18 +25,30 @@ func NewAuthService(repository repositories.UserRepositoryInterface) *AuthServic
 }
 
 func (service *AuthService) CreateUser(dto *auth.CreateUserDto) error {
+	user, errSearch := service.repository.SearchByLogin(dto.Login)
+
+	if errSearch != nil {
+		log.Printf("Error to search user %s", errSearch)
+		return errors.New("error to create user")
+	}
+
+	if user.Login != "" {
+		log.Printf("User already registered for %s", dto.Login)
+		return errors.New("user already registered")
+	}
+
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Printf("Error to hash password", err)
-		return errors.New("Error to create user")
+		log.Printf("Error to hash password %s", err)
+		return errors.New("error to create user")
 	}
 
 	err = service.repository.Register(dto.Name, dto.Login, string(hashedPassword))
 
 	if err != nil {
-		log.Printf("Error to create user", err)
+		log.Printf("Error to create user %s", err)
 
-		return errors.New("Error to create user")
+		return errors.New("error to create user")
 	}
 
 	return nil
