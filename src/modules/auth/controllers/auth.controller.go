@@ -54,7 +54,7 @@ func (controller *AuthController) RegisterUser(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{})
+	context.Redirect(http.StatusFound, "/")
 
 	return
 }
@@ -89,5 +89,5 @@ func (controller *AuthController) Login(context *gin.Context) {
 
 	context.SetCookie(cookieName, sessionToken, 3600, "/", "", false, true)
 
-	context.JSON(http.StatusOK, gin.H{})
+	context.Redirect(http.StatusFound, "/")
 }
