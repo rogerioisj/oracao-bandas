@@ -3,14 +3,14 @@
     <div class="m-8">
         <h1 class="modal-header">Login</h1>
         <div class="mt-2">
-            <form action="/" method="POST">
+            <form action="/api/auth/login" method="POST">
                 <div class="m-2">
-                    <label for="login-email">Email</label><br>
-                    <input type="email" id="login-email" name="Email" placeholder="Email" class="modal-input"><br>
+                    <label for="login-email">Login</label><br>
+                    <input type="text" id="login-email" name="login" placeholder="Login" class="modal-input"><br>
                 </div>
                 <div class="m-2">
                     <label for="login-password" class="mt-2">Senha</label><br>
-                    <input type="password" id="login-password" name="Senha" placeholder="Senha" required class="modal-input">
+                    <input type="password" id="login-password" name="password" placeholder="Senha" required class="modal-input">
                 </div>
                 <button data-close-modal class="btn mt-2" id="close-login-modal">Cancelar</button>
                 <button data-close-modal class="btn mt-2" type="submit">Login</button>
