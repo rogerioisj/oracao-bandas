@@ -6,5 +6,5 @@ import (
 
 type SessionRepositoryInterface interface {
 	Save(login string) (entities.Session, error)
-	Delete(login string) error
+	Delete(sessionId string) error
 }
