@@ -45,7 +45,7 @@ func (service *SaveBandService) LoadLastBands() []entities.Band {
 	bands, _, err := service.repository.List(1, 3, "")
 
 	if err != nil {
-		log.Panic(err)
+		log.Print(err)
 	}
 
 	return bands
@@ -55,7 +55,7 @@ func (service *SaveBandService) SearchBands(page int, number int, name string) (
 	bands, total, err := service.repository.List(page, number, name)
 
 	if err != nil {
-		log.Panic(err)
+		log.Print(err)
 	}
 
 	return bands, total
