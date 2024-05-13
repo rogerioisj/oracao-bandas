@@ -7,22 +7,22 @@ import (
 	"oracao-bandas.com/src/database/entities"
 )
 
-type AuthRepository struct {
+type UserRepository struct {
 	db *gorm.DB
 }
 
-func NewAuthRepository(db *gorm.DB) *AuthRepository {
-	return &AuthRepository{
+func NewUserRepository(db *gorm.DB) *UserRepository {
+	return &UserRepository{
 		db: db,
 	}
 }
 
-func (repository *AuthRepository) Register(name, email, password string) error {
+func (repository *UserRepository) Register(name, login, password string) error {
 	log.Printf("Registerig user for name: %s", name)
 
-	var user entities.Auth
+	var user entities.User
 	user.Name = name
-	user.Email = email
+	user.Login = login
 	user.Password = password
 
 	response := repository.db.Create(&user)
@@ -36,14 +36,19 @@ func (repository *AuthRepository) Register(name, email, password string) error {
 	return nil
 }
 
-func (repository *AuthRepository) SearchByEmail(email string) (entities.Auth, error) {
+func (repository *UserRepository) SearchByLogin(email string) (entities.User, error) {
 	log.Printf("Searching user for email: %s", email)
 
-	var user entities.Auth
+	var user entities.User
 
-	response := repository.db.First(&user, "email = ?", email)
+	response := repository.db.Limit(1).First(&user, "login = ?", email)
 
 	if response.Error != nil {
+
+		if response.Error.Error() == "record not found" {
+			return user, nil
+		}
+
 		log.Printf("Error trying to searching user. Details: %s", response.Error)
 		err := errors.New("DB error query")
 		return user, err
