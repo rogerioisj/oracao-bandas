@@ -16,6 +16,7 @@ func Connect(config *configuration.Configuration) *gorm.DB {
 
 	if err != nil {
 		log.Printf("Fail to connect to database: %s", err)
+		panic(err)
 	}
 
 	log.Printf("Using Postgres database at port %v", config.Database.Port)
