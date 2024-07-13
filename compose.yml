@@ -1,4 +1,23 @@
 services:
+  golang:
+    container_name: go_container
+    restart: on-failure:3
+    image: golang:latest
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    environment:
+      - PROJECT_ENV=development
+    volumes:
+      - type: bind
+        source: ./../../
+        target: /dev/projects
+    #deploy:
+     # resources:
+      #  limits:
+       #   cpus: "0.50"
+        #  memory: 256M
   postgres:
     container_name: postgres
     restart: always
@@ -13,4 +32,4 @@ services:
       resources:
         limits:
           cpus: "0.50"
-          memory: 200M
+          memory: 256M
