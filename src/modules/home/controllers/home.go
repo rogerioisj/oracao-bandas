@@ -58,17 +58,22 @@ func (h HomeController) Home(ctx *gin.Context) {
 		maxPage += 1
 	}
 
+	_, err := ctx.Cookie("session_token")
+	cookieExists := err == nil
+
 	log.Printf("Itens: %v", itens)
 	log.Printf("Total itens: %v", total)
 	log.Printf("Max page: %v", maxPage)
 	log.Printf("Page: %v", page)
+	log.Printf("Cookie: %v", cookieExists)
 
 	ctx.HTML(http.StatusOK, "home.html", gin.H{
-		"lastBands":  &lastBands,
-		"queryBands": &loadedBands,
-		"page":       &page,
-		"itens":      &itens,
-		"maxPage":    &maxPage,
+		"lastBands":    &lastBands,
+		"queryBands":   &loadedBands,
+		"page":         &page,
+		"itens":        &itens,
+		"maxPage":      &maxPage,
+		"cookieExists": &cookieExists,
 	},
 	)
 }
