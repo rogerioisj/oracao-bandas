@@ -4,6 +4,7 @@ import (
 	"errors"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"oracao-bandas.com/src/database/entities"
 	"oracao-bandas.com/src/database/repositories"
 	auth "oracao-bandas.com/src/modules/auth/structs"
 )
@@ -12,6 +13,7 @@ type AuthServiceInterface interface {
 	CreateUser(dto *auth.CreateUserDto) error
 	Login(dto *auth.LoginDto) (string, error)
 	Logout(sessionId string)
+	ListUsers(page, number int, name string) ([]entities.User, int)
 }
 
 type AuthService struct {
@@ -86,4 +88,13 @@ func (service *AuthService) Logout(sessionId string) {
 	_ = service.sessionRepository.Delete(sessionId)
 
 	return
+}
+
+func (service *AuthService) ListUsers(page int, number int, name string) ([]entities.User, int) {
+	users, total, err := service.userRepository.List(page, number, name)
+	if err != nil {
+		log.Print(err)
+	}
+
+	return users, total
 }

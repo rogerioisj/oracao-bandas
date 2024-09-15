@@ -2,9 +2,11 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"oracao-bandas.com/src/modules/auth/services"
 	auth "oracao-bandas.com/src/modules/auth/structs"
+	"strconv"
 )
 
 var (
@@ -16,6 +18,7 @@ type AuthControllerInterface interface {
 	RegisterUser(context *gin.Context)
 	Login(context *gin.Context)
 	Logout(context *gin.Context)
+	ListUsers(context *gin.Context)
 }
 
 type AuthController struct {
@@ -106,4 +109,34 @@ func (controller *AuthController) Logout(context *gin.Context) {
 	context.SetCookie(cookieName, "", -1, "/", "", false, true)
 
 	context.Redirect(http.StatusFound, "/")
+}
+
+func (controller *AuthController) ListUsers(context *gin.Context) {
+	query := context.Request.URL.Query()
+
+	page, _ := strconv.Atoi(query.Get("page"))
+	itens, _ := strconv.Atoi(query.Get("itens"))
+	name := query.Get("name")
+
+	users, total := controller.service.ListUsers(page, itens, name)
+
+	maxPage := total / itens
+
+	i := total % itens
+	if i > 0 {
+		maxPage += 1
+	}
+
+	log.Printf("Itens: %v", itens)
+	log.Printf("Total itens: %v", total)
+	log.Printf("Max page: %v", maxPage)
+	log.Printf("Page: %v", page)
+
+	context.HTML(http.StatusOK, "users.html", gin.H{
+		"users":   &users,
+		"page":    &page,
+		"itens":   &itens,
+		"maxPage": &maxPage,
+	},
+	)
 }
