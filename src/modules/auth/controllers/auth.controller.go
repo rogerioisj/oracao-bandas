@@ -112,31 +112,50 @@ func (controller *AuthController) Logout(context *gin.Context) {
 }
 
 func (controller *AuthController) ListUsers(context *gin.Context) {
+	var maxPage int
+
 	query := context.Request.URL.Query()
 
 	page, _ := strconv.Atoi(query.Get("page"))
 	itens, _ := strconv.Atoi(query.Get("itens"))
 	name := query.Get("name")
 
+	if page <= 0 {
+		page = 1
+	}
+
+	if itens <= 0 {
+		itens = 5
+	}
+
 	users, total := controller.service.ListUsers(page, itens, name)
 
-	maxPage := total / itens
+	maxPage = total / itens
 
 	i := total % itens
 	if i > 0 {
 		maxPage += 1
 	}
 
+	_, err := context.Cookie("session_token")
+	cookieExists := err == nil
+
 	log.Printf("Itens: %v", itens)
 	log.Printf("Total itens: %v", total)
 	log.Printf("Max page: %v", maxPage)
 	log.Printf("Page: %v", page)
+	log.Printf("Cookie: %v", cookieExists)
+
+	for _, v := range users {
+		log.Printf("Name: %s; User: %s, Created: %s, Email: %s", v.Name, v.Login, v.CreatedAt)
+	}
 
 	context.HTML(http.StatusOK, "users.html", gin.H{
-		"users":   &users,
-		"page":    &page,
-		"itens":   &itens,
-		"maxPage": &maxPage,
+		"users":        &users,
+		"page":         &page,
+		"itens":        &itens,
+		"cookieExists": &cookieExists,
+		"maxPage":      &maxPage,
 	},
 	)
 }
