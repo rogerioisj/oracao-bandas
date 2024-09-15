@@ -16,13 +16,14 @@ func StartServer(config *configuration.Configuration, db *gorm.DB) {
 		"isEven": func(value int) bool {
 			return value%2 == 0
 		},
-		"greaterThanArray": func(array []entities.Band, value int) bool { return len(array) > value },
-		"minusOrEqualThan": func(value1, value2 int) bool { return value1 <= value2 },
-		"greaterThan":      func(value1, value2 int) bool { return value1 > value2 },
-		"minusThan":        func(value1, value2 int) bool { return value1 < value2 },
-		"sub":              func(value1, value2 int) int { return value1 - value2 },
-		"add":              func(value1, value2 int) int { return value1 + value2 },
-		"equalsBool":       func(value1, value2 bool) bool { return value1 == value2 },
+		"greaterThanArray":     func(array []entities.Band, value int) bool { return len(array) > value },
+		"greaterThanArrayUser": func(array []entities.User, value int) bool { return len(array) > value },
+		"minusOrEqualThan":     func(value1, value2 int) bool { return value1 <= value2 },
+		"greaterThan":          func(value1, value2 int) bool { return value1 > value2 },
+		"minusThan":            func(value1, value2 int) bool { return value1 < value2 },
+		"sub":                  func(value1, value2 int) int { return value1 - value2 },
+		"add":                  func(value1, value2 int) int { return value1 + value2 },
+		"equalsBool":           func(value1, value2 bool) bool { return value1 == value2 },
 	})
 
 	router.LoadHTMLGlob("src/views/**/*")
