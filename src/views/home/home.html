@@ -52,5 +52,8 @@
     </main>
 </div>
 <script src="../../static/index.js"></script>
+{{ if equalsBool .cookieExists true }}
+<script src="../../static/logged-resources.js"></script>
+{{end}}
 </body>
 </html>
