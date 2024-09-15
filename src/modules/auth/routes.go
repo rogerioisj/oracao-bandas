@@ -13,4 +13,5 @@ func SetupRoutes(router *gin.RouterGroup, controller controllers.AuthControllerI
 	authGroup.POST("login", controller.Login)
 	authGroup.GET("logout", controller.Logout)
 	authGroup.GET("users", controller.ListUsers)
+	authGroup.POST("update-user", controller.UpdateLoggedUser)
 }
