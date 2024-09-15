@@ -85,5 +85,5 @@ func (h HomeController) SaveBand(ctx *gin.Context) {
 		return
 	}
 
-	ctx.Redirect(http.StatusFound, "/")
+	ctx.Redirect(http.StatusFound, "/") //TODO: redirect to not found page
 }
