@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <title>Oração Bandas</title>
+</head>
+<body class="text-gray-600 font-body">
+<div class="grid md:grid-cols-3">
+    <div class="bg-white md:col-span-1 md:flex md:justify-end">
+        {{template "nav bar"}}
+    </div>
+
+    <main class="px-16 bg-gray-50 py-6 md:col-span-2 h-dvh">
+        {{template "login modal"}}
+        {{template "band modal"}}
+        {{template "user modal"}}
+        {{template "login cadastro buttons"}}
+
+        <header class="py-6">
+            <h2 class="text-gray-700 text-6xl font-semibold">Em oração</h2>
+            <h3 class="text-gray-500 text-2xl font-semibold">Por todos, em comunhão</h3>
+        </header>
+
+        <div>
+            <h3 class="font-bold mt-12 pb-2 border-b-2 border-grey-200">Usuários</h3>
+
+            <div class="mt-8 w-full flex overflow-hidden shadow-md">
+                {{template "band list" .lastBands }}
+            </div>
+
+            <h3 class="font-bold mt-12 pb-2 border-b-2 border-gray-200">Lista</h3>
+
+            {{template "search bar band"}}
+
+            <div class="mt-8 w-full flex overflow-hidden shadow-md">
+                {{if greaterThanArray .queryBands 0 }}
+                {{template "band list" .queryBands }}
+                {{ else }}
+                <h1> Nenhuma banda encontrada </h1>
+                {{ end }}
+            </div>
+
+            {{template "list nav buttons" .}}
+        </div>
+    </main>
+</div>
+<script src="../../static/index.js"></script>
+</body>
+</html>
