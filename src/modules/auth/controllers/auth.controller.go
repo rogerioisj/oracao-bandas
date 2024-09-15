@@ -16,6 +16,7 @@ var (
 
 type AuthControllerInterface interface {
 	RegisterUser(context *gin.Context)
+	UpdateLoggedUser(context *gin.Context)
 	Login(context *gin.Context)
 	Logout(context *gin.Context)
 	ListUsers(context *gin.Context)
@@ -51,6 +52,46 @@ func (controller *AuthController) RegisterUser(context *gin.Context) {
 	dto.Password = password
 
 	err := controller.service.CreateUser(&dto)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": "Error to create user",
+		})
+		return
+	}
+
+	context.Redirect(http.StatusFound, "/")
+
+	return
+}
+
+func (controller *AuthController) UpdateLoggedUser(context *gin.Context) {
+	var dto auth.CreateUserDto
+
+	login := context.PostForm("login")
+	password := context.PostForm("password")
+	name := context.PostForm("name")
+
+	if login == "" || password == "" || name == "" {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": "No empty values allowed",
+		})
+
+		return
+	}
+
+	dto.Name = name
+	dto.Login = login
+	dto.Password = password
+
+	sessionID, _ := context.Cookie("session_token")
+
+	log.Printf("SessionId: %s", sessionID)
+
+	loggedUserLogin := controller.service.GetUserBySession(sessionID)
+
+	log.Printf("User from session: %s", loggedUserLogin)
+
+	err := controller.service.UpdateUser(&dto, loggedUserLogin)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"error": "Error to create user",
