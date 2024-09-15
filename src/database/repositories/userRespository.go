@@ -56,3 +56,30 @@ func (repository *UserRepository) SearchByLogin(email string) (entities.User, er
 
 	return user, nil
 }
+
+func (repository *UserRepository) List(page, number int, name string) ([]entities.User, int, error) {
+	log.Printf("Listing users for page: %v and number: %v", page, number)
+
+	var users []entities.User
+	var total int64
+
+	var offset int
+
+	if page < 1 {
+		offset = 0
+	} else {
+		offset = (page - 1) * number
+	}
+
+	response := repository.db.Order("created_at desc").Offset(offset).Limit(number).Where("LOWER(name) LIKE LOWER(?)", "%"+name+"%").Find(&users).Count(&total)
+	_ = repository.db.Model(entities.User{}).Where("LOWER(name) LIKE LOWER(?)", "%"+name+"%").Count(&total)
+
+	if response.Error != nil {
+		log.Printf("Error to load Users. Details: %s", response.Error)
+		return nil, 0, response.Error
+	}
+
+	newTotal := int(total)
+
+	return users, newTotal, nil
+}
