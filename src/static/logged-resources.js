@@ -21,3 +21,15 @@ openUserModalButton.addEventListener('click', () => {
 closeUserModalButton.addEventListener('click', () => {
     UserModal.close();
 });
+
+const openUpdatedUserModalButton = document.querySelector('#open-update-user-modal');
+const UpdateUserModal = document.querySelector('#update-user-modal');
+const closeUpdateUserModalButton = document.querySelector('#close-update-user-modal');
+
+openUpdatedUserModalButton.addEventListener('click', () => {
+    UpdateUserModal.showModal();
+});
+
+closeUpdateUserModalButton.addEventListener('click', () => {
+    UpdateUserModal.close();
+});
