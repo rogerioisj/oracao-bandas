@@ -1,8 +1,11 @@
 {{define "login cadastro buttons"}}
 <div class="flex justify-center md:justify-end">
     <a class="btn" data-open-modal id="open-login-modal">Login</a>
-    <a class="btn" data-open-modal href="/api/auth/logout">Logout</a>
-    <a class="btn" data-open-modal id="open-band-modal">Cadastro</a>
-    <a class="btn" data-open-modal id="open-user-modal">Usuario</a>
+
+    {{ if equalsBool . true }}
+        <a class="btn" data-open-modal href="/api/auth/logout">Logout</a>
+        <a class="btn" data-open-modal id="open-band-modal">Cadastro</a>
+        <a class="btn" data-open-modal id="open-user-modal">Usuario</a>
+    {{ end }}
 </div>
-{{end}}
+{{ end }}
