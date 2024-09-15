@@ -1,0 +1,20 @@
+{{define "user list"}}
+<table class="table-auto w-full">
+    <thead class="bg-gray-50 border-b-2 border-gray-200">
+    <tr>
+        <th class="th">Nome</th>
+        <th class="th max-md:hidden">Login</th>
+        <th class="th">Data de registro</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range $index, $element := . }}
+    <tr class="{{ if isEven $index }}tr-even{{ else }}tr-odd{{ end }}">
+        <td class="td">{{ $element.Name }}</td>
+        <td class="td max-md:hidden">{{ $element.Login }}</td>
+        <td class="td">{{ $element.CreatedAt }}</td>
+    </tr>
+    {{ end }}
+    </tbody>
+</table>
+{{end}}
