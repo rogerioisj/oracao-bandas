@@ -11,9 +11,12 @@ import (
 
 type AuthServiceInterface interface {
 	CreateUser(dto *auth.CreateUserDto) error
+	UpdateUser(dto *auth.CreateUserDto, login string) error
 	Login(dto *auth.LoginDto) (string, error)
 	Logout(sessionId string)
 	ListUsers(page, number int, name string) ([]entities.User, int)
+	GetUserByLogin(login string) (entities.User, error)
+	GetUserBySession(sessionId string) string
 }
 
 type AuthService struct {
@@ -26,6 +29,47 @@ func NewAuthService(userRepository repositories.UserRepositoryInterface, session
 		userRepository:    userRepository,
 		sessionRepository: sessionRepository,
 	}
+}
+
+func (service *AuthService) GetUserByLogin(login string) (entities.User, error) {
+	user, errSearch := service.userRepository.SearchByLogin(login)
+
+	if errSearch != nil {
+		log.Printf("Error to search user %s", errSearch)
+		return user, errors.New("error to create user")
+	}
+
+	return user, nil
+}
+
+func (service *AuthService) UpdateUser(dto *auth.CreateUserDto, login string) error {
+	user, errSearch := service.userRepository.SearchByLogin(login)
+
+	if errSearch != nil {
+		log.Printf("Error to search user %s", errSearch)
+		return errors.New("error to create user")
+	}
+
+	if user.Login == "" {
+		log.Printf("User not found for %s", dto.Login)
+		return errors.New("user not found")
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Printf("Error to hash password %s", err)
+		return errors.New("error to create user")
+	}
+
+	err = service.userRepository.Update(login, dto.Name, dto.Login, string(hashedPassword))
+
+	if err != nil {
+		log.Printf("Error to create user %s", err)
+
+		return errors.New("error to create user")
+	}
+
+	return nil
 }
 
 func (service *AuthService) CreateUser(dto *auth.CreateUserDto) error {
@@ -97,4 +141,10 @@ func (service *AuthService) ListUsers(page int, number int, name string) ([]enti
 	}
 
 	return users, total
+}
+
+func (service *AuthService) GetUserBySession(sessionId string) string {
+	session, _ := service.sessionRepository.Search(sessionId)
+
+	return session.Login
 }
