@@ -36,12 +36,41 @@ func (repository *UserRepository) Register(name, login, password string) error {
 	return nil
 }
 
-func (repository *UserRepository) SearchByLogin(email string) (entities.User, error) {
-	log.Printf("Searching user for email: %s", email)
+func (repository *UserRepository) Update(originLogin, name, login, password string) error {
+	log.Printf("Updating user for login: %s", originLogin)
+
+	var user entities.User
+	user.Login = originLogin
+
+	response := repository.db.First(&user)
+
+	if response.Error != nil {
+		log.Printf("Error trying to searching user. Details: %s", response.Error)
+		err := errors.New("DB error query")
+		return err
+	}
+
+	user.Login = login
+	user.Name = name
+	user.Password = password
+
+	response = repository.db.Save(&user)
+
+	if response.Error != nil {
+		log.Printf("Error trying to update user. Details: %s", response.Error)
+		err := errors.New("DB error query")
+		return err
+	}
+
+	return nil
+}
+
+func (repository *UserRepository) SearchByLogin(login string) (entities.User, error) {
+	log.Printf("Searching user for email: %s", login)
 
 	var user entities.User
 
-	response := repository.db.Limit(1).First(&user, "login = ?", email)
+	response := repository.db.Limit(1).First(&user, "login = ?", login)
 
 	if response.Error != nil {
 
