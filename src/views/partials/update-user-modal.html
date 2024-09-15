@@ -1,0 +1,25 @@
+{{define "update user modal"}}
+<dialog data-modal class="modal" id="update-user-modal">
+    <div class="m-8">
+        <h1 class="modal-header">Atualizar usuário Usuário</h1>
+        <div class="mt-2">
+            <form action="/api/auth/update-user" method="POST">
+                <div class="m-2">
+                    <label for="user-name">Nome</label><br>
+                    <input type="text" id="user-name" name="name" placeholder="Nome" required class="modal-input"><br>
+                </div>
+                <div class="m-2">
+                    <label for="user-login" class="mt-2">Login</label><br>
+                    <input type="text" id="user-login" name="login" placeholder="Login" required class="modal-input">
+                </div>
+                <div class="m-2">
+                    <label for="user-senha" class="mt-2">Senha</label><br>
+                    <input type="password" id="user-senha" name="password" placeholder="Senha" required class="modal-input">
+                </div>
+                <button data-close-modal class="btn mt-2" id="close-update-user-modal">Cancelar</button>
+                <button data-close-modal class="btn mt-2" type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+</dialog>
+{{end}}
