@@ -14,7 +14,7 @@
         <td class="td">{{ $element.Title }}</td>
         <td class="td max-md:hidden">{{ $element.Type }}</td>
         <td class="td max-md:hidden">{{ $element.Country }}</td>
-        <td class="td">{{ $element.CreatedAt }}</td>
+        <td class="td">{{ formatDate $element.CreatedAt }}</td>
     </tr>
     {{ end }}
     </tbody>

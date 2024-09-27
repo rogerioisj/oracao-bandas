@@ -1,12 +1,14 @@
 package server
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"html/template"
 	"oracao-bandas.com/src/configuration"
 	"oracao-bandas.com/src/database/entities"
 	"oracao-bandas.com/src/modules"
+	"time"
 )
 
 func StartServer(config *configuration.Configuration, db *gorm.DB) {
@@ -24,6 +26,12 @@ func StartServer(config *configuration.Configuration, db *gorm.DB) {
 		"sub":                  func(value1, value2 int) int { return value1 - value2 },
 		"add":                  func(value1, value2 int) int { return value1 + value2 },
 		"equalsBool":           func(value1, value2 bool) bool { return value1 == value2 },
+		"formatDate": func(date time.Time) string {
+			day := date.Day()
+			month := date.Month()
+			year := date.Year()
+			return fmt.Sprintf("%02d/%02d/%04d", day, month, year)
+		},
 	})
 
 	router.LoadHTMLGlob("src/views/**/*")
