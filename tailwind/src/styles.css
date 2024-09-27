@@ -19,3 +19,31 @@
 .anchor {
     @apply hover:text-red-800 mr-2;
 }
+
+.tr-odd {
+    @apply bg-gray-300 p-3;
+}
+
+.tr-even {
+    @apply bg-gray-200 p-3;
+}
+
+.td {
+    @apply p-3;
+}
+
+.th {
+    @apply p-4 text-left font-semibold tracking-wider;
+}
+
+.modal {
+    @apply rounded-lg border-2 border-red-500 p-4;
+}
+
+.modal-input {
+    @apply mb-2 rounded-lg border-2 border-gray-300 p-2;
+}
+
+.modal-header {
+    @apply flex justify-center border-b-2 border-gray-300;
+}
