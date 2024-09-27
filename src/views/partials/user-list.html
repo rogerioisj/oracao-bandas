@@ -12,7 +12,7 @@
     <tr class="{{ if isEven $index }}tr-even{{ else }}tr-odd{{ end }}">
         <td class="td">{{ $element.Name }}</td>
         <td class="td max-md:hidden">{{ $element.Login }}</td>
-        <td class="td">{{ $element.CreatedAt }}</td>
+        <td class="td">{{ formatDate $element.CreatedAt }}</td>
     </tr>
     {{ end }}
     </tbody>
