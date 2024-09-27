@@ -9,7 +9,11 @@
     </thead>
     <tbody>
     {{ range $index, $element := . }}
-    <tr class="{{ if isEven $index }}tr-even{{ else }}tr-odd{{ end }}">
+    {{ if isEven $index }}
+    <tr class="tr-even">
+    {{ else }}
+    <tr class="tr-odd ">
+    {{ end }}
         <td class="td">{{ $element.Name }}</td>
         <td class="td max-md:hidden">{{ $element.Login }}</td>
         <td class="td">{{ formatDate $element.CreatedAt }}</td>
