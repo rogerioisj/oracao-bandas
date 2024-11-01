@@ -2,6 +2,7 @@
 ## Projeto usado no grupo homônimo ao projeto
 #Ferramentas:
 - Go
+- Gorm
 - Postgres
 - Arquitetura modular
 - Tailwind
