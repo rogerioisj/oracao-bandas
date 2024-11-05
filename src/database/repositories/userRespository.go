@@ -42,7 +42,7 @@ func (repository *UserRepository) Update(originLogin, name, login, password stri
 	var user entities.User
 	user.Login = originLogin
 
-	response := repository.db.First(&user)
+	response := repository.db.Where(entities.User{Login: originLogin}).First(&user)
 
 	if response.Error != nil {
 		log.Printf("Error trying to searching user. Details: %s", response.Error)
