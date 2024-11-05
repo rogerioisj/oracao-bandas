@@ -47,7 +47,7 @@ func (service *AuthService) UpdateUser(dto *auth.CreateUserDto, login string) er
 
 	if errSearch != nil {
 		log.Printf("Error to search user %s", errSearch)
-		return errors.New("error to create user")
+		return errors.New("an error occurs trying to update user")
 	}
 
 	if user.Login == "" {
@@ -58,15 +58,15 @@ func (service *AuthService) UpdateUser(dto *auth.CreateUserDto, login string) er
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(dto.Password), bcrypt.DefaultCost)
 	if err != nil {
 		log.Printf("Error to hash password %s", err)
-		return errors.New("error to create user")
+		return errors.New("an error occurs trying to update user")
 	}
 
 	err = service.userRepository.Update(login, dto.Name, dto.Login, string(hashedPassword))
 
 	if err != nil {
-		log.Printf("Error to create user %s", err)
+		log.Printf("Error to update user %s", err)
 
-		return errors.New("error to create user")
+		return errors.New("an error occurs trying to update user")
 	}
 
 	return nil
